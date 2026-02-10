@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: iam-server
+
+
+# configuration datasource
+  datasource:
+    username: itpusr
+    password: itp@168
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:16850/db_iam
+
+#  config data jpa
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: true
+
+  security:
+    oauth2:
+      authorizationserver:
+        issuer: http://localhost:9999
+
+server:
+  port: 9999
+
+
+
+# configuration for resolve hostname by default OS
+eureka:
+  instance:
+    instance-id: ${spring.application.name}
+    prefer-ip-address: true
+
+logging:
+  level.org.springframework.security: DEBUG
+  level.org.springframework.security.oauth2.server.authorization: TRACE
+  level.org.springframework.security.oauth2.server.authorization.oidc.authentication: TRACE

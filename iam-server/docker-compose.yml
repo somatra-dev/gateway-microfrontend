@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: itp-
+    environment:
+      POSTGRES_USER: itp
+      POSTGRES_PASSWORD: itp@123
+      POSTGRES_DB: auth_db
+    ports:
+      - "5168:5432"
+    volumes:
+      - itp_auth_data:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - itp-net
+
+volumes:
+  itp_auth_data:
+networks:
+  itp-net:
+    external: true

@@ -1,0 +1,62 @@
+spring:
+  application:
+    name: front-bff
+
+
+  # configuration cloud-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              lower-case-service-id: true
+              enabled: true
+          default-filters:
+            - SaveSession
+            - TokenRelay=
+#            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+          routes:
+            - id: frontbff
+              uri: http://localhost:3000
+              predicates:
+                - Path=/**
+
+
+
+  # configuration oauth2-client
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9999
+
+      client:
+        provider:
+          itp-frontbff:
+            issuer-uri: http://localhost:9999
+        registration:
+          itp-frontbff:
+            provider: itp-frontbff
+            client-id: itp-frontbff
+            client-secret: qwerqwer
+            redirect-uri: http://localhost:3333/login/oauth2/code/itp-frontbff
+            authorization-grant-type:
+              - authorization_code
+            scope:
+              - openid # Auto issue access token
+              - profile # Get profile
+              - email # Get email
+server:
+  port: 3333
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}
+    prefer-ip-address: true
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.cloud.gateway.event: TRACE
