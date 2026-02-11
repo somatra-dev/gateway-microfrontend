@@ -10,6 +10,11 @@
         <module name="front-bff.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="iphone-service" target="21" />
+      <module name="iphone-service.main" target="21" />
+      <module name="iphone-service.test" target="21" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
@@ -22,9 +27,12 @@
       <module name="iam-server" options="-parameters" />
       <module name="iam-server.main" options="-parameters" />
       <module name="iam-server.test" options="-parameters" />
+      <module name="iphone" options="-parameters" />
       <module name="iphone-service" options="-parameters" />
       <module name="iphone-service.main" options="-parameters" />
       <module name="iphone-service.test" options="-parameters" />
+      <module name="iphone.main" options="-parameters" />
+      <module name="iphone.test" options="-parameters" />
     </option>
   </component>
 </project>

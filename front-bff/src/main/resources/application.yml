@@ -2,7 +2,6 @@ spring:
   application:
     name: front-bff
 
-
   # configuration cloud-gateway
   cloud:
     gateway:
@@ -11,18 +10,24 @@ spring:
           discovery:
             locator:
               lower-case-service-id: true
-              enabled: true
-          default-filters:
-            - SaveSession
-            - TokenRelay=
+              enabled: false
+#          default-filters:
+#            - SaveSession
+#            - TokenRelay=
 #            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
           routes:
+            - id: iphone-api
+              uri: lb://IPHONE
+              predicates:
+                - Path=/api/v1/iphones/**
+              filters:
+                - TokenRelay=
+                - SaveSession
+
             - id: frontbff
               uri: http://localhost:3000
               predicates:
                 - Path=/**
-
-
 
   # configuration oauth2-client
   security:

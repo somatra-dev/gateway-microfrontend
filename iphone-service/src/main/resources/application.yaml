@@ -1,9 +1,32 @@
 spring:
   application:
-    name: iphone-service
+    name: iphone
 
   security:
     oauth2:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:9999
+  # configuration datasource
+  datasource:
+    username: iphone
+    password: iphone
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:4441/iphone-db
+
+  #  config data jpa
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        show_sql: true
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}
+    prefer-ip-address: true
+
+server:
+  port: 4444

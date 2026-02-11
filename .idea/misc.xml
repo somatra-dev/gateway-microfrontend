@@ -5,6 +5,7 @@
     <file type="web" url="file://$PROJECT_DIR$/eureka-server" />
     <file type="web" url="file://$PROJECT_DIR$/front-bff" />
     <file type="web" url="file://$PROJECT_DIR$/iam-server" />
+    <file type="web" url="file://$PROJECT_DIR$/iphone-service" />
   </component>
   <component name="ProjectRootManager" version="2">
     <output url="file://$PROJECT_DIR$/out" />

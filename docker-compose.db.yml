@@ -1,0 +1,45 @@
+
+services:
+  iphone-db:
+    image: postgres:17.7
+    container_name: iphone-db
+    environment:
+      POSTGRES_DB: iphone-db
+      POSTGRES_USER: iphone
+      POSTGRES_PASSWORD: iphone
+    ports:
+      - "4441:5432"
+    volumes:
+      - iphone-db:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  ipad-db-2:
+    image: postgres:17.7
+    container_name: ipad-db-2
+    environment:
+      POSTGRES_DB: ipad-db
+      POSTGRES_USER: ipad
+      POSTGRES_PASSWORD: ipad
+    ports:
+      - "4442:5432"
+    volumes:
+      - ipad-db:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  macbook-db-3:
+    image: postgres:17.7
+    container_name: macbook-db-3
+    environment:
+      POSTGRES_DB: macbook-db
+      POSTGRES_USER: macbook
+      POSTGRES_PASSWORD: macbook
+    ports:
+      - "4443:5432"
+    volumes:
+      - macbook-db:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  iphone-db:
+  ipad-db:
+  macbook-db:
