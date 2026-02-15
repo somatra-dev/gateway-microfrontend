@@ -21,7 +21,7 @@ public class GatewayFallbackController {
         body.put("timestamp", Instant.now().toString());
         body.put("status", HttpStatus.SERVICE_UNAVAILABLE.value());
         body.put("error", "Service Unavailable");
-        body.put("message", "iphone-service is temporarily unavailable.");
+        body.put("message", "iphone-service is temporarily unavailable. please try retry again");
         body.put("path", "/api/v1/iphones");
 
         return Mono.just(ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(body));
