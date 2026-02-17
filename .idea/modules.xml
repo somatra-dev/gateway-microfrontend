@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Gateway.iml" filepath="$PROJECT_DIR$/.idea/Gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bff-gateway.main.iml" filepath="$PROJECT_DIR$/.idea/modules/bff-gateway.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/front-bff.main.iml" filepath="$PROJECT_DIR$/.idea/modules/front-bff.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/iam-server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/iam-server.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/iphone.main.iml" filepath="$PROJECT_DIR$/.idea/modules/iphone.main.iml" />
