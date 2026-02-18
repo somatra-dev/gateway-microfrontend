@@ -1,4 +1,5 @@
-package com.pesexpo.frontbff.security;
+package com.pesexpo.bffgateway.security;
+
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +21,6 @@ import java.net.URI;
 public class SecurityConfig {
 
 
-
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http,
                                                             ReactiveClientRegistrationRepository clientRegistrationRepository) {
@@ -34,12 +34,11 @@ public class SecurityConfig {
         http.formLogin(ServerHttpSecurity.FormLoginSpec::disable);
         http.httpBasic(ServerHttpSecurity.HttpBasicSpec::disable);
 
-//        http.oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()));
 
         // for flow gateway to issuer token from oauth2-server
         http.oauth2Login(oauth2 -> oauth2
                 .authenticationSuccessHandler(
-                        new RedirectServerAuthenticationSuccessHandler( "http://localhost:3333")
+                        new RedirectServerAuthenticationSuccessHandler("http://localhost:3333")
                 ));
 
         http.logout(logoutSpec -> logoutSpec
@@ -68,6 +67,4 @@ public class SecurityConfig {
 
         return handler;
     }
-
-
 }

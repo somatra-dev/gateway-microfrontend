@@ -23,20 +23,35 @@ spring:
                     name: iphoneApiCircuit
                     fallbackUri: forward:/fallback/iphone-api
 
-            - id: root
-              uri: http://localhost:3000
-              predicates:
-                - Path=/**
             - id: iphone
               uri: http://localhost:3001
               predicates:
-                - Path=/**
+                - Path=/iphone/**,/iphone-static/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: iphoneUiCircuit
+                    fallbackUri: forward:/fallback/iphone
             - id: ipad
               uri: http://localhost:3002
               predicates:
-                - Path=/**
+                - Path=/ipad/**,/ipad-static/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: ipadUiCircuit
+                    fallbackUri: forward:/fallback/ipad
             - id: macbook
               uri: http://localhost:3003
+              predicates:
+                - Path=/macbook/**,/macbook-static/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: macbookUiCircuit
+                    fallbackUri: forward:/fallback/macbook
+            - id: root
+              uri: http://localhost:3000
               predicates:
                 - Path=/**
 
@@ -74,9 +89,36 @@ resilience4j:
         failureRateThreshold: 50
         waitDurationInOpenState: 10s
         permittedNumberOfCallsInHalfOpenState: 3
+      iphoneUiCircuit:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 3
+      ipadUiCircuit:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 3
+      macbookUiCircuit:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 20
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 3
   timelimiter:
     instances:
       iphoneApiCircuit:
+        timeoutDuration: 3s
+      iphoneUiCircuit:
+        timeoutDuration: 3s
+      ipadUiCircuit:
+        timeoutDuration: 3s
+      macbookUiCircuit:
         timeoutDuration: 3s
 
 server:
